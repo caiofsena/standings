@@ -11,7 +11,6 @@ import com.premierleague.standings.repository.TimeRepository;
 
 @Service
 public class TimeService {
-	
 	@Autowired
 	private TimeRepository timeRepository;
 
@@ -25,5 +24,13 @@ public class TimeService {
 	
 	public TimeDTO saveTime(TimeDTO time) {
 		return timeRepository.saveTime(time);
+	}
+	
+	public TimeDTO updateTime(TimeDTO time) {
+		return timeRepository.updateTime(time);
+	}
+	
+	public void deleteTime(TimeDTO time) {
+		timeRepository.deleteTime(time);
 	}
 }

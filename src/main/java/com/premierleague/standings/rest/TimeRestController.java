@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +21,7 @@ import com.premierleague.standings.service.TimeService;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping(name = "/times")
+@RequestMapping(value = "/times")
 public class TimeRestController {
 
 	@Autowired
@@ -38,5 +41,16 @@ public class TimeRestController {
 	@PostMapping
 	public ResponseEntity<TimeDTO> saveTime(@RequestBody TimeDTO time){
 		return ResponseEntity.ok().body(timeService.saveTime(time));
+	}
+	
+	@PutMapping
+	public ResponseEntity<TimeDTO> updateTime(@RequestBody TimeDTO time){
+		return ResponseEntity.ok().body(timeService.updateTime(time));
+	}
+	
+	@DeleteMapping
+	public ResponseEntity<String> deleteTime(@RequestBody TimeDTO time){
+		timeService.deleteTime(time);
+		return ResponseEntity.ok().body(HttpStatus.OK.name());
 	}
 }
